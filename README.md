@@ -4,7 +4,7 @@
 1. Node.jsのインストール
 2. Angular CLIをインストール
 3. ワークスペースを作成してみる
-4. 起動してみる
+4. 起動する
 5. 実装してみる
 
 ## 1. Node.jsのインストール
@@ -48,7 +48,7 @@ npm ERR! A complete log of this run can be found in:
 npm ERR!     /Users/betashort/.npm/_logs/2021-08-16T12_40_54_546Z-debug.log
 ```
 
-管理者権限で実行する。
+### 管理者権限で実行する。
 
 ```
 sudo npm install -g @angular/cli
@@ -67,3 +67,125 @@ ng serve --open
 # Angularとは
 
 # TypeScript
+
+# build
+```
+ng build
+```
+
+# Projectの3のファイル
+1. index.html
+2. main.ts
+3. styles.scss
+
+## index.html
+```html
+<app-root></app-root>
+```
+
+<app-root>というコンポーネントを表示するためのタグ
+
+## main.ts
+
+### import
+```ts
+import {読み込む部品} from ライブラリ;
+```
+ライブラリは、読み込むファイル名+パスを記述する。ただし、読み込むファイルはTypeScriptになるので、拡張子は省略可能。
+
+
+## app.component
+### app.component.html
+コンポーネントのHTMLでは、コンポーネントとして表示するタグだけを記述する。
+
+### app.component.ts
+
+#### @Componentデコレータ
+タグの名前、テンプレートの場所、スタイルシートの場所を設定する。
+
+#### AppComponentクラス
+```ts
+export class AppComponent {
+  title = 'angular-app';
+}
+```
+exportは、外部から'AppComponent'を使えるようにするためのもの。
+
+# Componentを作成する
+
+```
+ng generate component {name}
+```
+
+# コンポーネント
+アプリケーションを組み立てる構成要素  
+`@Component()`デコレータには、次のAngular固有の情報を指定する。
+1. コンポーネントがテンプレートでどのように使用されるかを定義するCSSセレクター。このセレクターに一致するテンプレート内のHTML要素はコンポーネントのインスタンスになる。
+
+2. コンポーネントのレンダリング方法をAngularに指示するHTMLテンプレート
+
+3. テンプレートのHTML要素の外観を定義するCSSスタイルのオプションのセット。
+
+コンポーネントは3つのお要素で構成される。
+1. データと機能を扱うコンポーネントクラス
+2. UIを決定するHTMLテンプレート
+3. ルック安堵フィールを定義するコンポーネント固有のスタイル
+
+
+angular.jp/start
+
+
+```html
+<h2>Products</h2>
+<div *ngFor="let product of products">
+</div>
+```
+
+`*ngFor`を使うと、繰り返し実行される。
+
+プロパティバインディング`[]`構文を用いる。
+
+`*ngIf`を使うと、場合分けが実行される。
+
+`<button (click)="method()"`でイベントバインディング。
+
+`@Component()`は、セレクター、テンプレート、スタイルなど、コンポーネントに関するメタデータを提供する。
+
+# コンポーネントの概要
+
+* ページに表示するものを宣言するHTMLテンプレート
+* 振る舞いを定義するTypescriptクラス
+* テンプレート内でコンポーネントがどのように使用されるかを定義するCSSセレクター
+* オプションで、テンプレートに適用されるCSSスタイル
+
+## コンポーネントの作成
+
+### 自動で作成する
+`ng generate componet <componet-name>`
+
+### 手動で作成する。
+* <component-name>.component.ts
+
+```TypeScript
+import { Component } from '@angular/core';
+//デコレータ
+@Component({
+  //セレクタを指定する。
+  selector: 'app-component-overview',
+  //HTMLテンプレート
+  templateUrl: './component-overview.component.html',
+  //テンプレートのスタイル
+  styleUrls: ['./component-overview.component.css']
+})
+//コンポーネントのコードを含むclassを追加する。
+export class ComponentOverviewComponent{
+}
+```
+
+```TypeScript
+@Component({
+  selector: 'app-component-overview',
+  template: '<h1>Hello World!</h1>',
+  styles: ['h1 { font-weight: normal; }']
+})
+```
